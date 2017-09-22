@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  glusterrestd:
+    image: hjdr4/docker-glusterrestd
+    volumes:
+      - /var/run/glusterd.socket:/var/run/glusterd.socket
+    ports:
+      - 9000:9000

@@ -1,0 +1,11 @@
+#!/bin/bash
+ROOT_USER=${ROOT_USER:-docker}
+ROOT_PASSWORD=${ROOT_PASSWORD:-docker}
+
+if ! test -f /var/lib/glusterd/rest/users.db ;then
+    /usr/local/bin/glusterrest install
+    /usr/local/bin/glusterrest useradd -g glusterroot -p $ROOT_PASSWORD $ROOT_USER
+    ln -s /usr/local/bin/gunicorn /usr/bin/gunicorn
+fi
+
+exec /usr/bin/glusterrestd
